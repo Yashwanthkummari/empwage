@@ -2,12 +2,17 @@
 echo "Welcome to emoployee wage Computation"
 
 Wageperhour=20
-fulldayhour=8
-randomcheck=$((RANDOM%2))
-if [ $randomcheck -eq 1 ]
+Parttime=2
+Fulltime=1
+randomcheck=$((RANDOM%3))
+if [ $randomcheck -eq $Fulltime ]
 then
 	echo "employee is present"
 	Workinghours=8
+elif [ $randomcheck -eq $Parttime ]
+then
+	echo "employee is Parttime"
+	Workinghours=4
 else
 	echo "employee is absent"
 	Workinghours=0
