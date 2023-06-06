@@ -16,28 +16,12 @@ function calculatingworkinghour() {
 	echo $Workinghours;
 }
 Wageperhour=20
-numworkingdays=20
 maxhrsinamonth=100
-Totalemphrs=0
+Totalworkhours=0
 totalsalary=0
-days=1;
-i=0;
-while [[ $Totalemphrs -le $maxhrsinamonth && $days -le $numworkingdays ]]
+while [[ $Totalworkhours -le $maxhrsinamonth ]]
 do
 	whour=$(calculatingworkinghour $((RANDOM%3)));
-	Totalemphrs=$(($Totalemphrs + $whour));
-	if [ $Totalemphrs -gt 100 ]
-	then
-	extrahours=$(($Totalemphrs - 100));
-	whour=$(($Totalemphrs - $extrahours));
-	fi
-	day=$days
-	salary=$(($whour * $Wageperhour));
-	daynumber=$(($i+1))
-        salariesarray[((i++))]="day$daynumber=$salary"
-	totalsalary=$(($totalsalary+$salary));
-	((days++))
+	Totalworkhours=$(($Totalworkhours + $whour));
 done
-echo "employee has worked for $days days ina month for $Totalemphrs and earned $totalsalary" 
-echo ${salariesarray[@]}
-
+echo "WorkHours are $Totalworkhours"
