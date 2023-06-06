@@ -1,32 +1,40 @@
 #!/bin/bash -x
 echo "Welcome to emoployee wage Computation"
+function calculatingworkinghour() {
+	case $1 in
+		 1)
+                
+                Workinghours=8;;
 
+                2)
+                
+                Workinghours=4;;
+                0)
+                
+                Workinghours=0;;
+	esac
+	echo $Workinghours;
+}
 Wageperhour=20
-Parttime=2
-Fulltime=1
 numworkingdays=20
 maxhrsinamonth=100
 Totalemphrs=0
-totalworkingdays=0
+totalsalary=0
+day=1;
 
-while [[ $Totalemphrs -le $maxhrsinamonth && $totalworkingdays -le $numworkingdays ]]
+while [[ $Totalemphrs -le $maxhrsinamonth && $day -le $numworkingdays ]]
 do
-	((totalworkingdays++))
-	randomcheck=$((RANDOM%3))
-	case $randomcheck in
-		$Fulltime)
-		echo "employee is present"
-		Workinghours=8;;
-
-		$Parttime) 
-		echo "employee is Parttime"
-		Workinghours=4;;
-		*)
-		echo "employee is absent"
-		Workinghours=0;;
-	esac
-	Totalemphrs=$(($Totalemphrs+$Workinghours));
+	whour=$(calculatingworkinghour $((RANDOM%3)));
+	Totalemphrs=$(($Totalemphrs + $whour));
+	if [ $Totalemphrs -gt 100 ]
+	then
+	extrahours=$(($Totalemphrs - 100));
+	whour=$(($Totalemphrs - $extrahours));
+	fi
+	salary=$(($whour * $Wageperhour));
+	totalsalary=$(($totalsalary+$salary));
+	((day++))
 done
-Totalsalary=$(($Totalemphrs*$Wageperhour));
+echo "employee has earned $totalsalary in a month for working for $whour" 
 
 
