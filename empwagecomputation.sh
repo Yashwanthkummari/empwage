@@ -20,9 +20,9 @@ numworkingdays=20
 maxhrsinamonth=100
 Totalemphrs=0
 totalsalary=0
-day=1;
-
-while [[ $Totalemphrs -le $maxhrsinamonth && $day -le $numworkingdays ]]
+days=1;
+i=0;
+while [[ $Totalemphrs -le $maxhrsinamonth && $days -le $numworkingdays ]]
 do
 	whour=$(calculatingworkinghour $((RANDOM%3)));
 	Totalemphrs=$(($Totalemphrs + $whour));
@@ -31,10 +31,13 @@ do
 	extrahours=$(($Totalemphrs - 100));
 	whour=$(($Totalemphrs - $extrahours));
 	fi
+	day=$days
 	salary=$(($whour * $Wageperhour));
+	daynumber=$(($i+1))
+        salariesarray[((i++))]="day$daynumber=$salary"
 	totalsalary=$(($totalsalary+$salary));
-	((day++))
+	((days++))
 done
-echo "employee has earned $totalsalary in a month for working for $whour" 
-
+echo "employee has worked for $days days ina month for $Totalemphrs and earned $totalsalary" 
+echo ${salariesarray[@]}
 
