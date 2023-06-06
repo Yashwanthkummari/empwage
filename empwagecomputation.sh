@@ -5,17 +5,18 @@ Wageperhour=20
 Parttime=2
 Fulltime=1
 randomcheck=$((RANDOM%3))
-if [ $randomcheck -eq $Fulltime ]
-then
+
+case $randomcheck in
+	$Fulltime)
 	echo "employee is present"
-	Workinghours=8
-elif [ $randomcheck -eq $Parttime ]
-then
+	Workinghours=8;;
+
+	$Parttime) 
 	echo "employee is Parttime"
-	Workinghours=4
-else
+	Workinghours=4;;
+	*)
 	echo "employee is absent"
-	Workinghours=0
-fi
+	Workinghours=0;;
+esac
 salary=$(($Wageperhour*$Workinghours))
 echo "salary of emp :" $salary
